@@ -497,9 +497,10 @@
             } else if (type === 'topo') {
                 tileLayer = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; USGS', maxZoom: 16 }).addTo(map);
             } else if (type === 'soils') {
-                tileLayer = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { attribution: '&copy; Esri', maxZoom: 19 }).addTo(map);
+                // Use light base map so soil polygons are visible (not satellite)
+                tileLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution: '&copy; CARTO', maxZoom: 19 }).addTo(map);
                 var soilLayer = L.tileLayer.wms('https://SDMDataAccess.sc.egov.usda.gov/Spatial/SDM.wms', {
-                    layers: 'mapunitpoly', format: 'image/png', transparent: true, attribution: '&copy; USDA NRCS', opacity: 0.6
+                    layers: 'mapunitpoly', format: 'image/png', transparent: true, attribution: '&copy; USDA NRCS', opacity: 0.7
                 }).addTo(map);
                 map._extraLayers.push(soilLayer);
             } else if (type === 'flood') {
